@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import { composeStories } from "@storybook/testing-react";
 import userEvent from "@testing-library/user-event";
-import * as stories from "./App.stories";
+import * as stories from "./TodoApp.stories";
 import { SWRConfig } from "swr";
 import { rest } from "msw";
 import { setupServer } from "msw/node";
@@ -12,7 +12,7 @@ beforeAll(() => server.listen());
 afterEach(() => server.resetHandlers());
 afterAll(() => server.close());
 
-const { TodoApp } = composeStories(stories);
+const { Default } = composeStories(stories);
 const user = userEvent.setup();
 
 type RestGetCallback = Parameters<typeof rest.get>[1];
@@ -46,7 +46,7 @@ describe("TodoApp", () => {
       )
     );
     // Act
-    renderWithNoCache(<TodoApp />);
+    renderWithNoCache(<Default />);
     // Assert
     expect(await screen.findByText(/test message/)).toBeInTheDocument();
     expect(apiRequestCall).toHaveBeenCalledTimes(1);
@@ -65,7 +65,7 @@ describe("TodoApp", () => {
         ])
       )
     );
-    const renderResult = renderWithNoCache(<TodoApp />);
+    const renderResult = renderWithNoCache(<Default />);
     const revalidateButton = await renderResult.findByRole("button", {
       name: "revalidate",
     });
@@ -86,7 +86,7 @@ describe("TodoApp", () => {
       )
     );
     // Act
-    renderWithNoCache(<TodoApp />);
+    renderWithNoCache(<Default />);
     // Assert
     expect(await screen.findByRole("alert")).toHaveTextContent(
       /Request failed/

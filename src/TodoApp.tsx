@@ -1,6 +1,6 @@
 import useSwr, { useSWRConfig } from "swr";
 import axios from "axios";
-import "./App.css";
+import "./TodoApp.css";
 
 const fetcher = (url: string) => axios.get(url).then((res) => res.data);
 
@@ -9,7 +9,7 @@ export type Todo = {
   text: string;
 };
 
-function App() {
+function TodoApp() {
   const { mutate } = useSWRConfig();
   const { data, error, isLoading } = useSwr<Todo[]>("/api/todos", fetcher);
 
@@ -33,4 +33,4 @@ function App() {
   );
 }
 
-export default App;
+export default TodoApp;
