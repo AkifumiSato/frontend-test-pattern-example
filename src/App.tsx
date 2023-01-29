@@ -1,9 +1,8 @@
 import useSwr, { useSWRConfig } from "swr";
+import axios from 'axios'
 import "./App.css";
 
-type FetchArgs = Parameters<typeof fetch>;
-const fetcher = (...args: FetchArgs) =>
-  fetch(...args).then((res) => res.json());
+const fetcher = (url: string) => axios.get(url).then(res => res.data)
 
 type Todo = {
   id: number;
