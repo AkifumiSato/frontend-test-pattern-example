@@ -14,7 +14,8 @@ function App() {
   const { data, error, isLoading } = useSwr<Todo[]>("/api/todos", fetcher);
 
   if (isLoading) return <div>loading...</div>;
-  if (error) return <div>error: {JSON.stringify(error.message)}</div>;
+  if (error)
+    return <div role="alert">error: {JSON.stringify(error.message)}</div>;
 
   return (
     <div className="App">
@@ -27,7 +28,7 @@ function App() {
           </li>
         ))}
       </ul>
-      <button onClick={() => mutate("/api/todos")}>mutate</button>
+      <button onClick={() => mutate("/api/todos")}>revalidate</button>
     </div>
   );
 }
