@@ -1,10 +1,10 @@
 import useSwr, { useSWRConfig } from "swr";
-import axios from 'axios'
+import axios from "axios";
 import "./App.css";
 
-const fetcher = (url: string) => axios.get(url).then(res => res.data)
+const fetcher = (url: string) => axios.get(url).then((res) => res.data);
 
-type Todo = {
+export type Todo = {
   id: number;
   text: string;
 };
@@ -14,7 +14,7 @@ function App() {
   const { data, error, isLoading } = useSwr<Todo[]>("/api/todos", fetcher);
 
   if (isLoading) return <div>loading...</div>;
-  if (error) return <div>error: {JSON.stringify(error)}</div>;
+  if (error) return <div>error: {JSON.stringify(error.message)}</div>;
 
   return (
     <div className="App">
