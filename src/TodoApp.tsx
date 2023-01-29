@@ -1,4 +1,4 @@
-import useSwr, { useSWRConfig } from "swr";
+import useSWR, { useSWRConfig } from "swr";
 import axios from "axios";
 import "./TodoApp.css";
 
@@ -11,7 +11,7 @@ export type Todo = {
 
 function TodoApp() {
   const { mutate } = useSWRConfig();
-  const { data, error, isLoading } = useSwr<Todo[]>("/api/todos", fetcher);
+  const { data, error, isLoading } = useSWR<Todo[]>("/api/todos", fetcher);
 
   if (isLoading) return <div>loading...</div>;
   if (error)
