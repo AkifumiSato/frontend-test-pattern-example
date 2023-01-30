@@ -30,8 +30,8 @@ const setupTodoApi = (callback: RestGetCallback) => {
 const renderWithNoCache = (ui: React.ReactNode) =>
   render(<SWRConfig value={{ provider: () => new Map() }}>{ui}</SWRConfig>);
 
-describe("TodoApp", () => {
-  test("APIが呼び出され、取得結果が表示されること", async () => {
+describe("API呼び出し成功時", () => {
+  test("取得結果が表示されること", async () => {
     // Arrange
     const { apiRequestCall } = setupTodoApi((_req, res, ctx) =>
       res(
@@ -73,8 +73,10 @@ describe("TodoApp", () => {
     // Assert
     expect(apiRequestCall).toHaveBeenCalledTimes(2);
   });
+});
 
-  test("APIがエラーを返したら、エラーメッセージが表示されること", async () => {
+describe("API呼び出しエラー時", () => {
+  test("エラーメッセージが表示されること", async () => {
     // Arrange
     const { apiRequestCall } = setupTodoApi((_req, res, ctx) =>
       res(
