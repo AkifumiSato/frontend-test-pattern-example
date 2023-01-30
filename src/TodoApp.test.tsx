@@ -12,7 +12,7 @@ beforeAll(() => server.listen());
 afterEach(() => server.resetHandlers());
 afterAll(() => server.close());
 
-const { ApiSuccess } = composeStories(stories);
+const { ApiSuccess, ApiError } = composeStories(stories);
 const user = userEvent.setup();
 
 type RestGetCallback = Parameters<typeof rest.get>[1];
@@ -87,7 +87,7 @@ describe("API呼び出しエラー時", () => {
       )
     );
     // Act
-    renderWithNoCache(<ApiSuccess />);
+    renderWithNoCache(<ApiError />);
     // Assert
     expect(await screen.findByRole("alert")).toHaveTextContent(
       /Request failed/
