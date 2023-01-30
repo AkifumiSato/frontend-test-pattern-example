@@ -12,7 +12,7 @@ beforeAll(() => server.listen());
 afterEach(() => server.resetHandlers());
 afterAll(() => server.close());
 
-const { Default } = composeStories(stories);
+const { ApiSuccess } = composeStories(stories);
 const user = userEvent.setup();
 
 type RestGetCallback = Parameters<typeof rest.get>[1];
@@ -45,7 +45,7 @@ describe("TodoApp", () => {
       )
     );
     // Act
-    renderWithNoCache(<Default />);
+    renderWithNoCache(<ApiSuccess />);
     // Assert
     expect(await screen.findByText(/test message/)).toBeInTheDocument();
     expect(apiRequestCall).toHaveBeenCalledTimes(1);
@@ -64,7 +64,7 @@ describe("TodoApp", () => {
         ])
       )
     );
-    const renderResult = renderWithNoCache(<Default />);
+    const renderResult = renderWithNoCache(<ApiSuccess />);
     const revalidateButton = await renderResult.findByRole("button", {
       name: "revalidate",
     });
@@ -85,7 +85,7 @@ describe("TodoApp", () => {
       )
     );
     // Act
-    renderWithNoCache(<Default />);
+    renderWithNoCache(<ApiSuccess />);
     // Assert
     expect(await screen.findByRole("alert")).toHaveTextContent(
       /Request failed/

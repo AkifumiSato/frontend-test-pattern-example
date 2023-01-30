@@ -3,7 +3,7 @@ import TodoApp from "./TodoApp";
 
 export default { component: TodoApp };
 
-export const Default = {};
+export const ApiSuccess = {};
 
 export const ApiError = {
   parameters: {
