@@ -17,11 +17,10 @@ const user = userEvent.setup();
 
 type RestGetCallback = Parameters<typeof rest.get>[1];
 const setupTodoApi = (callback: RestGetCallback) => {
-  const apiRequestCall = jest.fn();
+  const apiRequestCall = jest.fn(callback);
   server.use(
     rest.get("/api/todos", (req, res, ctx) => {
-      apiRequestCall();
-      return callback(req, res, ctx);
+      return apiRequestCall(req, res, ctx);
     })
   );
   return {
